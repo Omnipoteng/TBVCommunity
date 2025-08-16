@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spoiler Boruto TBV</title>
+    <style>
+        :root {
+            --primary-color: #333135;
+            --secondary-color: #000000;
+            --accent-color: #e53935;
+            --light-color: #f8f9fa;
+            --dark-color: #212121;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .home-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .home-btn:hover {
+            background-color: var(--light-color);
+            transform: translateY(-2px);
+        }
+
+        .spoiler-warning {
+            background-color: #fff3e0;
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .spoiler-warning h2 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .spoiler-content {
+            margin: 30px 0;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .spoiler-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .anime-poster {
+            width: 120px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 20px;
+        }
+
+        .anime-info h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .show-spoiler-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .show-spoiler-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .spoiler-text {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .spoiler-text p {
+            margin-bottom: 10px;
+        }
+
+        .spoiler-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .spoiler-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .spoiler-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .spoiler-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-content h4 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .card-content p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .home-btn {
+                margin-top: 15px;
+            }
+
+            .spoiler-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .anime-poster {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Spoiler manga Boruto TBV</div>
+            <a href="tbv.html" class="home-btn">Kembali ke Beranda</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="spoiler-warning">
+            <h2>⚠ Peringatan Spoiler!</h2>
+            <p>Halaman ini berisi informasi penting tentang alur cerita anime. Jika Anda belum menonton anime yang bersangkutan dan tidak ingin mendapat spoiler, harap meninggalkan halaman ini sekarang.</p>
+        </div>
+
+        <div class="spoiler-content">
+            <div class="spoiler-header">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/54530711-b326-4afa-82a6-95b1d2ec1819.png" alt="Poster anime Demon Slayer: Kimetsu no Yaiba dengan karakter utama Tanjiro Kamado memegang pedang" class="anime-poster">
+                <div class="anime-info">
+                    <h3>Demon Slayer: Kimetsu no Yaiba</h3>
+                    <p>Season 3: Swordsmith Village Arc</p>
+                </div>
+            </div>
+
+            <button class="show-spoiler-btn" onclick="toggleSpoiler('spoiler1')">Tampilkan Spoiler</button>
+
+            <div class="spoiler-text" id="spoiler1">
+                <p>1. Nezuko akhirnya mengembangkan kekebalan terhadap sinar matahari setelah peristiwa di benteng Hantengu.</p>
+                <p>2. Mitsuri Kanroji (Hashira Cinta) dan Muichiro Tokito (Hashira Kabut) memainkan peran penting dalam arc ini.</p>
+                <p>3. Terungkap bahwa Muichiro adalah keturunan dari klan Kamado dan memiliki hubungan darah dengan Tanjiro.</p>
+                <p>4. Pedang baru Tanjiro dibuat dari logam yang sama dengan anting-anting milik keluarganya.</p>
+                <p>5. Hantengu, Upper Moon 4, memiliki kemampuan untuk berpisah menjadi beberapa emosi yang berbeda.</p>
+            </div>
+        </div>
+
+        <div class="spoiler-grid">
+            <div class="spoiler-card">
+                <div class="card-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/99b66c15-f7cd-438a-8d58-0742f61eee36.png" alt="Gambar karakter Eren Yeager dari Attack on Titan dengan ekspresi serius">
+                </div>
+                <div class="card-content">
+                    <h4>Attack on Titan Final Season</h4>
+                    <p>Spoiler utama tentang akhir dari seri populer ini dan nasib Eren Yeager.</p>
+                    <button class="show-spoiler-btn" onclick="toggleSpoiler('spoiler2')">Tampilkan Spoiler</button>
+                </div>
+                <div class="spoiler-text" id="spoiler2">
+                    <p>1. Eren telah merencanakan semuanya sejak menerima memori masa depan.</p>
+                    <p>2. Mikasa adalah kunci untuk menghentikan Rumbling.</p>
+                    <p>3. 80% populasi dunia telah dimusnahkan sebelum Rumbling dihentikan.</p>
+                </div>
+            </div>
+
+            <div class="spoiler-card">
+                <div class="card-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/146a478c-6ea0-4ab6-a955-ecf94f430ca5.png" alt="Gambar karakter Luffy dari One Piece dalam bentuk Gear 5">
+                </div>
+                <div class="card-content">
+                    <h4>One Piece Wano Arc</h4>
+                    <p>Penemuan besar tentang Devil Fruit Luffy dan pertarungan melawan Kaido.</p>
+                    <button class="show-spoiler-btn" onclick="toggleSpoiler('spoiler3')">Tampilkan Spoiler</button>
+                </div>
+                <div class="spoiler-text" id="spoiler3">
+                    <p>1. Devil Fruit Luffy sebenarnya adalah Human-Human Fruit, Model: Nika.</p>
+                    <p>2. Kaido akhirnya dikalahkan setelah pertempuran epik di Onigashima.</p>
+                    <p>3. Wano akhirnya dibebaskan setelah 20 tahun di bawah kekuasaan Orochi dan Kaido.</p>
+                </div>
+            </div>
+
+            <div class="spoiler-card">
+                <div class="card-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0f8cb0cd-041d-4cc7-b721-b8e11a3556e3.png" alt="Poster anime Jujutsu Kaisen dengan karakter Yuji Itadori dan Sukuna">
+                </div>
+                <div class="card-content">
+                    <h4>Jujutsu Kaisen: Shibuya Incident</h4>
+                    <p>Peristiwa tragis di Shibuya yang mengubah nasib banyak karakter.</p>
+                    <button class="show-spoiler-btn" onclick="toggleSpoiler('spoiler4')">Tampilkan Spoiler</button>
+                </div>
+                <div class="spoiler-text" id="spoiler4">
+                    <p>1. Gojo Satoru disegel dalam Prison Realm oleh Geto palsu.</p>
+                    <p>2. Nanami Kento dan Nobara Kugisaki mengalami nasib tragis.</p>
+                    <p>3. Yuji harus menghadapi kenyataan pahit tentang identitas Sukuna.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 Anime Spoiler Zone. Semua spoiler disediakan dengan risiko Anda sendiri.</p>
+    </footer>
+
+    <script>
+        function toggleSpoiler(id) {
+            const spoiler = document.getElementById(id);
+            const button = spoiler.previousElementSibling;
+            
+            if (spoiler.style.display === 'block') {
+                spoiler.style.display = 'none';
+                button.textContent = 'Tampilkan Spoiler';
+            } else {
+                spoiler.style.display = 'block';
+                button.textContent = 'Sembunyikan Spoiler';
+            }
+        }
+    </script>
+</body>
+</html>

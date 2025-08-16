@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Power Scaling Database</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .character-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgb(255, 255, 255);
+        }
+        
+        .power-bar {
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .power-fill {
+            height: 100%;
+            transition: width 0.8s ease;
+            border-radius: 4px;
+        }
+        
+        .modal {
+            transition: all 0.3s ease;
+        }
+        
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .tier-s { background: linear-gradient(45deg, #000000, #ffffff); }
+        .tier-a { background: linear-gradient(45deg, #000000, #ffffff); }
+        .tier-b { background: linear-gradient(45deg, #000000, #ffffff); }
+        .tier-c { background: linear-gradient(45deg, #000000, #ffffff); }
+        
+        .stat-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            margin: 0 auto;
+        }
+        
+        .bg-gradient-main {
+            background: linear-gradient(135deg, #000000 0%, #000000 100%);
+        }
+        
+        .character-image {
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin-left: 500px;
+            display: inline-block; /* biar bisa dikasih padding */
+            padding: 5px 20px;   /* tinggi & lebar tombol */
+            background-color: #ffffff; /* warna tombol */
+            color: rgb(0, 0, 0);         /* warna teks */
+            text-decoration: none; /* hilangin underline */
+            border-radius: 8px;    /* sudut membulat */
+            font-family: 'Roboto', sans-serif; /* font */
+            font-weight: bold;
+            transition: 0.3s;     /* animasi halus */
+            margin-top: 20px;
+        }
+
+        .nav-links:hover {
+            color: var(--light-gray);
+            background-color: white;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: var(--white);
+        }
+
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-main py-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold text-center mb-2">Character Power Scaling Database</h1>
+            <p class="text-center text-gray-200">Kami menempatkan 8 char terkuat dalam cerita Boruto TBV. Clik untuk rincian lenkapnya</p>
+            <a href="tbv.html" class="logo">TBV COMUNITY</a>
+            <ul class="nav-links">
+                <li><a href="tbv.html">kembali ke halaman utama</a></li>
+            </ul>
+        </div>
+    </header>
+       
+    <!-- Character Grid -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="characterGrid">
+            <!-- Characters will be dynamically loaded here -->
+        </div>
+    </main>
+
+    <!-- Modal for Character Details -->
+    <div id="characterModal" class="modal hide fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 id="modalTitle" class="text-3xl font-bold"></h2>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Character Image and Basic Info -->
+                    <div>
+                        <div id="modalImage" class="mb-4"></div>
+                        <div id="modalBasicInfo" class="space-y-2"></div>
+                    </div>
+                    
+                    <!-- Power Stats and Details -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Power Statistics</h3>
+                        <div id="modalStats" class="space-y-4"></div>
+                        
+                        <h3 class="text-xl font-bold mt-6 mb-4">Abilities & Skills</h3>
+                        <div id="modalAbilities" class="space-y-2"></div>
+                        
+                        <h3 class="text-xl font-bold mt-6 mb-4">Background</h3>
+                        <div id="modalBackground" class="text-gray-300"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Character Database
+        const characters = [
+            {
+                id: 1,
+                name: "Otsutsuki Shibai",
+                tier: "H3A",
+                universe: "Naruto & Boruto verse",
+                age: "Tidak di ketahui, kemungkinan ribuan tahun",
+                species: "Otsutsuki",
+                height: "Tidak diketahui",
+                weight: "Tidak diketahui",
+                image: "shibai.jpeg",
+                imageAlt: "Powerful female cosmic guardian with flowing silver hair, glowing blue eyes, wearing ethereal armor made of starlight, floating in space surrounded by galaxies and cosmic energy",
+                stats: {
+                    strength: 0,
+                    speed: 0,
+                    durability: 0,
+                    intelligence: 0,
+                    energy: 0,
+                    combat: 0
+                },
+                abilities: [
+                    "Reality warping",
+                    "information manipulation type 1 & 2",
+                    "Creation",
+                    "Dimensional Travel",
+                    "Matter manipulation",
+                    "Data manipulation"
+                ],
+                background: "Selama beberapa milenium, Shibai berulang kali membangkitkan dirinya sendiri menggunakan Kama , dan selama itu ia memakan banyak Buah Chakra . Ia akhirnya dianggap telah berevolusi menjadi dewa, dan kemampuannya disebut sebagai mukjizat ilahi."
+            },
+            {
+                id: 2,
+                name: "Uzumaki Naruto",
+                tier: "H5B",
+                universe: "Naruto & Boruto verse",
+                age: "347",
+                species: "Demon Hybrid",
+                height: "6'0\"",
+                weight: "180 lbs",
+                image: "naruto.jpeg",
+                imageAlt: "Dark mysterious warrior with black hair and red eyes, wearing a black hooded cloak, holding twin shadow-wreathed katanas, standing in a misty dark forest",
+                stats: {
+                    strength: 78,
+                    speed: 95,
+                    durability: 78,
+                    intelligence: 82,
+                    energy: 100,
+                    combat: 96
+                },
+                abilities: [
+                    "Existence errasure",
+                    "Life manipulation",
+                    "Power nullification",
+                    "Elemental manipulation",
+                    "Regeneration",
+                    "Deconstruction"
+                ],
+                background: "Born from the union of a human warrior and a shadow demon, Kain walks the line between light and darkness. His mastery of shadow techniques and legendary swordsmanship makes him one of the most feared assassins in the Netherworld."
+            },
+            {
+                id: 3,
+                name: "Uzumaki Kawaki",
+                tier: "5B",
+                universe: "Naruto & Boruto verse",
+                age: "16",
+                species: "Cyborg, Otsutsuki",
+                height: "5'8\"",
+                weight: "145 lbs",
+                image: "kawaki.jpeg",
+                imageAlt: "Majestic female warrior with electric blue hair flowing in the wind, golden lightning-themed armor, surrounded by crackling thunder and storm clouds, holding a lightning staff",
+                stats: {
+                    strength: 75,
+                    speed: 80,
+                    durability: 75,
+                    intelligence: 80,
+                    energy: 75,
+                    combat: 85
+                },
+                abilities: [
+                    "Lightning Control",
+                    "Weather Manipulation",
+                    "Electromagnetic Fields",
+                    "Storm Summoning",
+                    "Flight",
+                    "Electrical Immunity"
+                ],
+                background: "Lyra gained her powers after being struck by a legendary thunderbolt during a fierce storm. Now serving as the Empress of the Storm Kingdoms, she commands the very forces of nature and protects her realm from those who would abuse the power of the elements."
+            },
+            {
+                id: 4,
+                name: "Jura (hitoshinju)",
+                tier: "5B",
+                universe: "Naruto & Boruto verse",
+                age: "unknown",
+                species: "Ego juubi",
+                height: "unknown",
+                weight: "unknown",
+                image: "jura.jpeg",
+                imageAlt: "Muscular man with short brown hair and determined expression, wearing industrial metallic armor with steam-powered enhancements, large mechanical gauntlets, standing in an industrial cityscape",
+                stats: {
+                    strength: 85,
+                    speed: 65,
+                    durability: 88,
+                    intelligence: 75,
+                    energy: 70,
+                    combat: 82
+                },
+                abilities: [
+                    "Enhanced Strength",
+                    "Mechanical Engineering",
+                    "Steam Power",
+                    "Metal Manipulation",
+                    "Tactical Combat",
+                    "Armor Systems"
+                ],
+                background: "Magnus was a brilliant engineer who enhanced his body with steam-powered mechanical augmentations after losing his family in an industrial accident. Now he uses his incredible strength and engineering expertise to protect Steel City from mechanical threats."
+            },
+            {
+                id: 5,
+                name: "Mystic Sage Aria",
+                tier: "A",
+                universe: "Arcane Realms",
+                age: "156",
+                species: "High Elf",
+                height: "5'6\"",
+                weight: "120 lbs",
+                image: "https://placehold.co/400x600",
+                imageAlt: "Elegant elf woman with long silver hair and pointed ears, wearing flowing purple and gold robes with magical runes, holding a glowing crystal staff, surrounded by floating magical orbs and ancient tomes",
+                stats: {
+                    strength: 45,
+                    speed: 70,
+                    durability: 60,
+                    intelligence: 98,
+                    energy: 95,
+                    combat: 78
+                },
+                abilities: [
+                    "Arcane Magic",
+                    "Spell Weaving",
+                    "Elemental Control",
+                    "Astral Projection",
+                    "Ancient Knowledge",
+                    "Magical Barriers"
+                ],
+                background: "Aria is a legendary sage who has spent over a century studying the ancient arts of magic. Her vast knowledge of arcane mysteries and powerful spellcasting abilities make her one of the most respected magic users in the Arcane Realms."
+            },
+            {
+                id: 6,
+                name: "Void Walker Rex",
+                tier: "S",
+                universe: "Dimensional Nexus",
+                age: "Unknown",
+                species: "Void Entity",
+                height: "6'6\"",
+                weight: "Unknown",
+                image: "https://placehold.co/400x600",
+                imageAlt: "Tall mysterious figure in a dark hooded robe with glowing purple void energy emanating from within, standing in a swirling portal of dark energy and cosmic void, with reality distorting around him",
+                stats: {
+                    strength: 88,
+                    speed: 85,
+                    durability: 90,
+                    intelligence: 92,
+                    energy: 99,
+                    combat: 87
+                },
+                abilities: [
+                    "Void Manipulation",
+                    "Dimensional Travel",
+                    "Reality Erasure",
+                    "Space-Time Control",
+                    "Existence Negation",
+                    "Omnipresence"
+                ],
+                background: "Rex exists between dimensions, a being of pure void energy who maintains the balance between realities. His true origins are unknown, but his power to manipulate the very fabric of existence makes him one of the most dangerous entities in the multiverse."
+            },
+            {
+                id: 7,
+                name: "Crystal Knight Elena",
+                tier: "B",
+                universe: "Gemstone Realm",
+                age: "24",
+                species: "Crystal Human",
+                height: "5'7\"",
+                weight: "160 lbs",
+                image: "https://placehold.co/400x600",
+                imageAlt: "Beautiful woman with crystalline armor made of various colored gems, translucent crystal sword, blonde hair with crystal highlights, standing in a cavern filled with massive glowing crystals",
+                stats: {
+                    strength: 72,
+                    speed: 75,
+                    durability: 85,
+                    intelligence: 70,
+                    energy: 80,
+                    combat: 78
+                },
+                abilities: [
+                    "Crystal Manipulation",
+                    "Gem Weaponry",
+                    "Light Refraction",
+                    "Hardening",
+                    "Crystal Healing",
+                    "Prism Defense"
+                ],
+                background: "Elena was transformed by exposure to the Heart of the Gemstone Realm, gaining the ability to manipulate and generate various crystals. She serves as a knight protector, using her crystalline powers to defend her realm from those who seek to exploit its magical resources."
+            },
+            {
+                id: 8,
+                name: "Flame Emperor Dante",
+                tier: "A",
+                universe: "Inferno Domains",
+                age: "42",
+                species: "Fire Elemental",
+                height: "6'1\"",
+                weight: "190 lbs",
+                image: "https://placehold.co/400x600",
+                imageAlt: "Imposing man with flame-red hair and beard, wearing ornate red and gold armor with flame motifs, surrounded by swirling fire and molten lava, holding a flaming two-handed sword",
+                stats: {
+                    strength: 82,
+                    speed: 78,
+                    durability: 85,
+                    intelligence: 80,
+                    energy: 92,
+                    combat: 88
+                },
+                abilities: [
+                    "Pyrokinesis",
+                    "Molten Control",
+                    "Heat Immunity",
+                    "Flame Sword",
+                    "Inferno Creation",
+                    "Fire Teleportation"
+                ],
+                background: "Dante rose to power through the volcanic trials of the Inferno Domains, proving his mastery over fire and flame. As the Flame Emperor, he rules over the fire elementals and protects his domain from ice-based threats that could extinguish the eternal flames."
+            }
+        ];
+
+        // Initialize the page
+        function init() {
+            loadCharacters();
+        }
+
+        // Load characters into the grid
+        function loadCharacters() {
+            const grid = document.getElementById('characterGrid');
+            grid.innerHTML = '';
+
+            characters.forEach(character => {
+                const card = createCharacterCard(character);
+                grid.appendChild(card);
+            });
+        }
+
+        // Create character card element
+        function createCharacterCard(character) {
+            const card = document.createElement('div');
+            card.className = `character-card bg-gray-800 rounded-lg overflow-hidden tier-${character.tier.toLowerCase()}`;
+            card.onclick = () => openCharacterModal(character);
+
+            card.innerHTML = `
+                <div class="relative">
+                    <img src="${character.image}" alt="${character.imageAlt}" class="character-image w-full" />
+                    <div class="absolute top-2 right-2 tier-${character.tier.toLowerCase()} text-white px-2 py-1 rounded font-bold">
+                        ${character.tier} Tier
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-xl font-bold mb-2">${character.name}</h3>
+                    <p class="text-gray-400 mb-3">${character.universe}</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span>Strength</span>
+                            <span>${character.stats.strength}/100</span>
+                        </div>
+                        <div class="power-bar bg-gray-700">
+                            <div class="power-fill tier-${character.tier.toLowerCase()}" style="width: ${character.stats.strength}%"></div>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>Energy</span>
+                            <span>${character.stats.energy}/100</span>
+                        </div>
+                        <div class="power-bar bg-gray-700">
+                            <div class="power-fill tier-${character.tier.toLowerCase()}" style="width: ${character.stats.energy}%"></div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <button class="bg-black-600 hover:bg-black-700 px-4 py-2 rounded text-sm font-medium transition-colors">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Open character modal
+        function openCharacterModal(character) {
+            const modal = document.getElementById('characterModal');
+            const title = document.getElementById('modalTitle');
+            const image = document.getElementById('modalImage');
+            const basicInfo = document.getElementById('modalBasicInfo');
+            const stats = document.getElementById('modalStats');
+            const abilities = document.getElementById('modalAbilities');
+            const background = document.getElementById('modalBackground');
+
+            title.textContent = character.name;
+
+            image.innerHTML = `
+                <img src="${character.image}" alt="${character.imageAlt}" class="w-full rounded-lg character-image" />
+                <div class="mt-2 tier-${character.tier.toLowerCase()} text-center py-2 rounded font-bold">
+                    ${character.tier} Tier Character
+                </div>
+            `;
+
+            basicInfo.innerHTML = `
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div><strong>Universe:</strong> ${character.universe}</div>
+                    <div><strong>Age:</strong> ${character.age}</div>
+                    <div><strong>Species:</strong> ${character.species}</div>
+                    <div><strong>Height:</strong> ${character.height}</div>
+                    <div><strong>Weight:</strong> ${character.weight}</div>
+                </div>
+            `;
+
+            const statKeys = Object.keys(character.stats);
+            stats.innerHTML = statKeys.map(stat => `
+                <div class="flex items-center space-x-4">
+                    <div class="stat-circle tier-${character.tier.toLowerCase()}">${character.stats[stat]}</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between mb-1">
+                            <span class="capitalize font-medium">${stat}</span>
+                            <span>${character.stats[stat]}/100</span>
+                        </div>
+                        <div class="power-bar bg-gray-700">
+                            <div class="power-fill tier-${character.tier.toLowerCase()}" style="width: ${character.stats[stat]}%"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            abilities.innerHTML = character.abilities.map(ability => `
+                <div class="bg-gray-700 px-3 py-2 rounded-lg text-sm">${ability}</div>
+            `).join('');
+
+            background.textContent = character.background;
+
+            modal.classList.remove('hide');
+            modal.classList.add('show');
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('characterModal');
+            modal.classList.remove('show');
+            modal.classList.add('hide');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('characterModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

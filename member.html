@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Member - Community Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Tombol Kembali Manual */
+        .btn-kembali {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 28px;
+            background: linear-gradient(90deg, #000000, #6e6d70, #000000);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 999px;
+            box-shadow: 0 4px 16px rgba(59,130,246,0.15);
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 18px;
+            transition: transform 0.18s, box-shadow 0.18s;
+            text-decoration: none;
+        }
+        .btn-kembali:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 24px rgba(139,92,246,0.18);
+            color: #fff;
+            text-decoration: none;
+        }
+        .btn-kembali i {
+            margin-right: 10px;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .member-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .member-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: #3b82f6;
+        }
+
+        .member-card:hover::before {
+            opacity: 1;
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .member-card:hover .member-avatar {
+            border-color: #3b82f6;
+            transform: scale(1.05);
+        }
+
+        .tiktok-btn {
+            background: linear-gradient(135deg, #ff0050, #ff4081);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tiktok-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(255, 0, 80, 0.3);
+        }
+
+        .search-container {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #000000 0%, #000000 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Tombol Kembali -->
+    <div style="max-width: 1120px; margin: 0 auto; padding-top: 24px; padding-left: 16px; padding-right: 16px;">
+        <a href="tbv.html" class="btn-kembali"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
+    </div>
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">All member TBV</h1>
+                    <p class="text-gray-600 mt-1">Temukan dan terhubung dengan member community kami</p>
+                </div>
+                <div class="stats-card">
+                    <div class="text-2xl font-bold" id="memberCount">100</div>
+                    <div class="text-sm opacity-90">Total Member</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search and Filter Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="search-container">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1">
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            class="search-input pl-12" 
+                            placeholder="Cari member berdasarkan nama atau asal daerah..."
+                        >
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <select id="sortSelect" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="name">Urutkan: Nama</option>
+                        <option value="age">Urutkan: Umur</option>
+                        <option value="city">Urutkan: Asal Daerah</option>
+                    </select>
+                    <button id="clearBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                        <i class="fas fa-times mr-2"></i>Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Members Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div id="membersContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Members will be dynamically inserted here -->
+        </div>
+        
+        <!-- No results message -->
+        <div id="noResults" class="hidden text-center py-12">
+            <div class="text-gray-400 text-6xl mb-4">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-700 mb-2">Tidak ada member yang ditemukan</h3>
+            <p class="text-gray-500">Coba ubah kata kunci pencarian Anda</p>
+        </div>
+    </section>
+
+    <script>
+        // Sample member data - 100 members
+        const members = [
+            { name: "gak tau", age: 17, city: "Riau", tiktok: "@andipratama23" },
+            { name: "gak tau", age: 18, city: "Surabaya", tiktok: "@arya_omnipoteng" },
+            { name: "gak tau", age: 25, city: "Malaysia", tiktok: "@budisantoso" },
+            { name: "gak tau", age: 22, city: "Yogyakarta", tiktok: "@mayasari22" },
+            { name: "gak tau", age: 24, city: "Medan", tiktok: "@rizkimd" },
+            { name: "gak tau", age: 20, city: "Bali", tiktok: "@indiraputri" },
+            { name: "gak tau", age: 26, city: "Semarang", tiktok: "@fajarnugroho" },
+            { name: "gak tau", age: 23, city: "Malang", tiktok: "@dewilestari" },
+            { name: "gak tau", age: 27, city: "Makassar", tiktok: "@ahmadfauzi" },
+            { name: "gak tau", age: 21, city: "Solo", tiktok: "@lunamaharani" },
+            { name: "gak tau", age: 24, city: "Bogor", tiktok: "@dimasprasetyo" },
+            { name: "gak tau", age: 22, city: "Depok", tiktok: "@cintaaulia" },
+            { name: "gak tau", age: 25, city: "Tangerang", tiktok: "@randisaputra" },
+            { name: "gak tau", age: 20, city: "Bekasi", tiktok: "@nisakartika" },
+            { name: "gak tau", age: 28, city: "Palembang", tiktok: "@yogapratama" },
+            { name: "gak tau", age: 23, city: "Lampung", tiktok: "@putriayu23" },
+            { name: "gak tau", age: 26, city: "Batam", tiktok: "@galangpermana" },
+            { name: "gak tau", age: 21, city: "Pontianak", tiktok: "@sintamaharani" },
+            { name: "gak tau", age: 24, city: "Banjarmasin", tiktok: "@bayuaji24" },
+            { name: "gak tau", age: 22, city: "Balikpapan", tiktok: "@rikasari" },
+            { name: "gak tau", age: 25, city: "Samarinda", tiktok: "@ekoprasetyo" },
+            { name: "gak tau", age: 20, city: "Manado", tiktok: "@wulandari" },
+            { name: "gak tau", age: 27, city: "Palu", tiktok: "@arifrahman" },
+            { name: "gak tau", age: 23, city: "Kendari", tiktok: "@sarimelati" },
+            { name: "gak tau", age: 26, city: "Ambon", tiktok: "@hendrawijaya" },
+            { name: "gak tau", age: 21, city: "Jayapura", tiktok: "@linapermatasari" },
+            { name: "gak tau", age: 24, city: "Banda Aceh", tiktok: "@agussantoso" },
+            { name: "gak tau", age: 22, city: "Padang", tiktok: "@fitrihandayani" },
+            { name: "gak tau", age: 25, city: "Pekanbaru", tiktok: "@irvanmaulana" },
+            { name: "gak tau", age: 20, city: "Jambi", tiktok: "@devianggraini" },
+            { name: "gak tau", age: 28, city: "Bengkulu", tiktok: "@tonisetiawan" },
+            { name: "gak tau", age: 23, city: "Palangka Raya", tiktok: "@megasafitri" },
+            { name: "gak tau", age: 26, city: "Kupang", tiktok: "@rioferdinand" },
+            { name: "gak tau", age: 21, city: "Mataram", tiktok: "@ayulestari" },
+            { name: "gak tau", age: 24, city: "Denpasar", tiktok: "@dedykurniawan" },
+            { name: "gak tau", age: 22, city: "Cirebon", tiktok: "@siskaamelia" },
+            { name: "gak tau", age: 25, city: "Purwokerto", tiktok: "@jokosusilo" },
+            { name: "gak tau", age: 20, city: "Tegal", tiktok: "@rinisuryani" },
+            { name: "gak tau", age: 27, city: "Pekalongan", tiktok: "@adinugroho" },
+            { name: "gak tau", age: 23, city: "Kudus", tiktok: "@triwahyuni" },
+            { name: "gak tau", age: 26, city: "Magelang", tiktok: "@bambangpriyanto" },
+            { name: "gak tau", age: 21, city: "Salatiga", tiktok: "@niaramadhani" },
+            { name: "gak tau", age: 24, city: "Surakarta", tiktok: "@danihermawan" },
+            { name: "gak tau", age: 22, city: "Klaten", tiktok: "@evisusanti" },
+            { name: "gak tau", age: 25, city: "Wonogiri", tiktok: "@gitasavitri" },
+            { name: "gak tau", age: 20, city: "Karanganyar", tiktok: "@hadipurnomo" },
+            { name: "gak tau", age: 28, city: "Boyolali", tiktok: "@intanpermata" },
+            { name: "gak tau", age: 23, city: "Sragen", tiktok: "@jonisetiadi" },
+            { name: "gak tau", age: 26, city: "Sukoharjo", tiktok: "@kikiamallia" },
+            { name: "gak tau", age: 21, city: "Cianjur", tiktok: "@lanioktavia" },
+            { name: "gak tau", age: 24, city: "Sukabumi", tiktok: "@miraandini" },
+            { name: "gak tau", age: 22, city: "Garut", tiktok: "@noviandriani" },
+            { name: "gak tau", age: 25, city: "Tasikmalaya", tiktok: "@omarsharif" },
+            { name: "gak tau", age: 20, city: "Banjar", tiktok: "@pritamaharani" },
+            { name: "gak tau", age: 27, city: "Pangandaran", tiktok: "@qorisandrina" },
+            { name: "gak tau", age: 23, city: "Kuningan", tiktok: "@rezaaditya" },
+            { name: "gak tau", age: 26, city: "Majalengka", tiktok: "@sintadewi" },
+            { name: "gak tau", age: 21, city: "Indramayu", tiktok: "@taripuspita" },
+            { name: "gak tau", age: 24, city: "Subang", tiktok: "@udinsaepudin" },
+            { name: "gak tau", age: 22, city: "Karawang", tiktok: "@veranatalia" },
+            { name: "gak tau", age: 25, city: "Purwakarta", tiktok: "@widipratama" },
+            { name: "gak tau", age: 20, city: "Kediri", tiktok: "@yanisusilawati" },
+            { name: "gak tau", age: 28, city: "Blitar", tiktok: "@zakimubarak" },
+            { name: "gak tau", age: 23, city: "Tulungagung", tiktok: "@adeirawan" },
+            { name: "gak tau", age: 26, city: "Trenggalek", tiktok: "@bellasafira" },
+            { name: "gak tau", age: 21, city: "Nganjuk", tiktok: "@candrakirana" },
+            { name: "gak tau", age: 24, city: "Madiun", tiktok: "@dannypratama" },
+            { name: "gak tau", age: 22, city: "Magetan", tiktok: "@elsamaharani" },
+            { name: "gak tau", age: 25, city: "Ngawi", tiktok: "@faridhardian" },
+            { name: "gak tau", age: 20, city: "Bojonegoro", tiktok: "@ginapuspita" },
+            { name: "gak tau", age: 27, city: "Tuban", tiktok: "@harissetiawan" },
+            { name: "gak tau", age: 23, city: "Lamongan", tiktok: "@idaayu" },
+            { name: "gak tau", age: 26, city: "Gresik", tiktok: "@jerryaditya" },
+            { name: "gak tau", age: 21, city: "Sidoarjo", tiktok: "@karinasari" },
+            { name: "gak tau", age: 24, city: "Pasuruan", tiktok: "@luckyhakim" },
+            { name: "gak tau", age: 22, city: "Probolinggo", tiktok: "@melisuryani" },
+            { name: "gak tau", age: 25, city: "Lumajang", tiktok: "@nicopratama" },
+            { name: "gak tau", age: 20, city: "Jember", tiktok: "@ochamaharani" },
+            { name: "gak tau", age: 28, city: "Bondowoso", tiktok: "@putramandiri" },
+            { name: "gak tau", age: 23, city: "Situbondo", tiktok: "@qianadewi" },
+            { name: "gak tau", age: 26, city: "Banyuwangi", tiktok: "@randifirmansyah" },
+            { name: "gak tau", age: 21, city: "Jombang", tiktok: "@sellyoktarina" },
+            { name: "gak tau", age: 24, city: "Mojokerto", tiktok: "@tommykurniawan" },
+            { name: "gak tau", age: 22, city: "Batu", tiktok: "@ucisanusi" },
+            { name: "gak tau", age: 25, city: "Blitar", tiktok: "@vinaamelia" },
+            { name: "gak tau", age: 20, city: "Pacitan", tiktok: "@wahyupradana" },
+            { name: "gak tau", age: 27, city: "Ponorogo", tiktok: "@yudisetiawan" },
+            { name: "gak tau", age: 23, city: "Magetan", tiktok: "@zahraaulia" },
+            { name: "gak tau", age: 26, city: "Cilacap", tiktok: "@ariwibowo" },
+            { name: "gak tau", age: 21, city: "Banyumas", tiktok: "@belaoctavia" },
+            { name: "gak tau", age: 24, city: "Purbalingga", tiktok: "@ciciparamitha" },
+            { name: "gak tau", age: 22, city: "Banjarnegara", tiktok: "@dedisetiawan" },
+            { name: "gak tau", age: 25, city: "Kebumen", tiktok: "@estiwahyuni" },
+            { name: "gak tau", age: 20, city: "Purworejo", tiktok: "@fanioktari" },
+            { name: "gak tau", age: 28, city: "Wonosobo", tiktok: "@gerrypratama" },
+            { name: "gak tau", age: 23, city: "Temanggung", tiktok: "@henisusanti" },
+            { name: "gak tau", age: 26, city: "Kendal", tiktok: "@ivanmaulana" },
+            { name: "gak tau", age: 21, city: "Batang", tiktok: "@jihanaulia" },
+            { name: "gak tau", age: 24, city: "Pekalongan", tiktok: "@kevinaditya" },
+            { name: "gak tau", age: 22, city: "Pemalang", tiktok: "@lisapermata" },
+            { name: "gak tau", age: 25, city: "Brebes", tiktok: "@marioteguh" },
+            { name: "gak tau", age: 20, city: "Tegal", tiktok: "@nandapratiwi" }
+        ];
+
+        let filteredMembers = [...members];
+
+        // DOM Elements
+        const searchInput = document.getElementById('searchInput');
+        const sortSelect = document.getElementById('sortSelect');
+        const clearBtn = document.getElementById('clearBtn');
+        const membersContainer = document.getElementById('membersContainer');
+        const memberCount = document.getElementById('memberCount');
+        const noResults = document.getElementById('noResults');
+
+        // Create member card HTML
+        function createMemberCard(member, index) {
+            // Jika ada avatar, tampilkan gambar, jika tidak tampilkan ikon user
+            let avatarHtml = '';
+            if (member.avatar) {
+                avatarHtml = `<img src="${member.avatar}" alt="${member.name}" class="member-avatar mb-4" style="object-fit:cover;width:80px;height:80px;border-radius:50%;border:3px solid #e2e8f0;">`;
+            } else {
+                avatarHtml = `<div class="member-avatar mb-4" style="background:#e2e8f0;width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#b0b0b0;"><i class='fas fa-user'></i></div>`;
+            }
+            return `
+                <div class="member-card fade-in" style="animation-delay: ${index * 0.1}s">
+                    <div class="flex flex-col items-center text-center">
+                        ${avatarHtml}
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">${member.name}</h3>
+                        <div class="space-y-2 mb-4 w-full">
+                            <div class="flex items-center justify-center text-gray-600">
+                                <i class="fas fa-birthday-cake w-4 mr-2"></i>
+                                <span class="text-sm">${member.age} tahun</span>
+                            </div>
+                            <div class="flex items-center justify-center text-gray-600">
+                                <i class="fas fa-map-marker-alt w-4 mr-2"></i>
+                                <span class="text-sm">${member.city}</span>
+                            </div>
+                        </div>
+                        <a href="https://tiktok.com/${member.tiktok}" target="_blank" class="tiktok-btn">
+                            <i class="fab fa-tiktok"></i>
+                            ${member.tiktok}
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render members
+        function renderMembers() {
+            membersContainer.innerHTML = '';
+            
+            if (filteredMembers.length === 0) {
+                noResults.classList.remove('hidden');
+                membersContainer.classList.add('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                membersContainer.classList.remove('hidden');
+                
+                filteredMembers.forEach((member, index) => {
+                    membersContainer.innerHTML += createMemberCard(member, index);
+                });
+            }
+            
+            memberCount.textContent = filteredMembers.length;
+        }
+
+        // Search functionality
+        function searchMembers() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            filteredMembers = members.filter(member => 
+                member.name.toLowerCase().includes(searchTerm) ||
+                member.city.toLowerCase().includes(searchTerm)
+            );
+            
+            sortMembers();
+        }
+
+        // Sort functionality
+        function sortMembers() {
+            const sortBy = sortSelect.value;
+            
+            filteredMembers.sort((a, b) => {
+                switch(sortBy) {
+                    case 'age':
+                        return a.age - b.age;
+                    case 'city':
+                        return a.city.localeCompare(b.city);
+                    case 'name':
+                    default:
+                        return a.name.localeCompare(b.name);
+                }
+            });
+            
+            renderMembers();
+        }
+
+        // Clear search and filters
+        function clearSearch() {
+            searchInput.value = '';
+            sortSelect.value = 'name';
+            filteredMembers = [...members];
+            sortMembers();
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', searchMembers);
+        sortSelect.addEventListener('change', sortMembers);
+        clearBtn.addEventListener('click', clearSearch);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            sortMembers();
+        });
+
+        // Loading animation for search
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            membersContainer.classList.add('loading');
+            
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                membersContainer.classList.remove('loading');
+            }, 300);
+        });
+    </script>
+</body>
+</html>

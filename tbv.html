@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TBV - Komunitas Anime Creator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tbv.css">
+    <style>
+    /* Scroll team mulus dan responsif */
+    .team-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+        .team-scroll {
+                display: flex;
+                gap: 32px;
+                scroll-behavior: smooth;
+                overflow-x: auto;
+                padding-bottom: 12px;
+                padding-right: 24px;
+                scroll-snap-type: x mandatory;
+        }
+        @media (min-width: 900px) {
+            .team-scroll {
+                padding-right: 80px;
+            }
+        }
+    .team-member {
+        flex: 0 0 auto;
+        scroll-snap-align: center;
+        width: 220px;
+        /* Atur lebar sesuai kebutuhan */
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="tbv.html" class="logo">TBV COMUNITY</a>
+            <ul class="nav-links">
+                <li><a href="tbv.html">Home</a></li>
+                <li><a href="event.html">Event</a></li>
+                <li><a href="halaman2.html">Power scalling</a></li>
+                <li><a href="member.html">Members</a></li>
+                <li><a href="spoiler.html">Spoiler</a></li>
+            </ul>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Mau cari apa lu...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>KOMUNITAS CREATOR TBV</h1>
+        <p>Selamat datang, ini adalah website resmi dari komunitas TBV. berisi seputar info info penting seperti seleksi masuk marga, bio data (member & admin), pemilihan admin baru, spoiler manga Boruto, dll</p>
+        <a href="https://chat.whatsapp.com/JoujpczU0C43maOGKSdoH1?mode=ac_t" class="cta-btn">BELUM PUNYA MARGA? MASUK TBV YUK</a>
+    </section>
+
+    <section class="team-section">
+        <h2 class="section-title">ADMIN KOMUNITAS</h2>
+        <h3 class="section-title-2">Komunitas kami mempunyai beberapa divisi, setiap divisi diketua oleh admin (ketua divisi bisa berubah sewaktu waktu)</h3>
+
+        <div class="team-container">
+            <div class="team-scroll" id="teamScroll">
+                <div class="team-member">
+                    <a href="https://tiktok.com/@ze4nxy" target="_blank">
+                        <img src="zen.jpeg" alt="Profil Admin 1: Pria berambut hitam dan ganteng (masih gantengan arya)" class="member-image">
+                    </a>
+                    <div class="member-info">
+                        <h3>Zen (Consequence)</h3>
+                        <p>Founder TBV</p>
+                        <div class="member-social">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <a href="https://www.tiktok.com/@arya_omnipoteng?_t=ZS-8ysyykdcnFi&_r=1" target="_blank">
+                        <img src="arya.jpeg" alt="Profil Admin 2: cowo ganteng mirip ayanokouji" class="member-image">
+                    </a>
+                    <div class="member-info">
+                        <h3>Arya (Singularity)</h3>
+                        <p>Death battle division</p>
+                        <div class="member-social">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <a href="https://www.tiktok.com/@aliptbv?_t=ZS-8ysjqxosmBN&_r=1" target="_blank">
+                        <img src="alip.jpeg" alt="Profil Admin 3: Preman grub cuy, ada karbit langsung disikat" class="member-image">
+                    </a>
+                    <div class="member-info">
+                        <h3>Alipp (Destruction)</h3>
+                        <p>Spoiler division</p>
+                        <div class="member-social">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <a href="https://www.tiktok.com/" target="_blank">
+                        <img src="az.jpeg" alt="Profil Admin 4: cowo kalem & cool" class="member-image">
+                    </a>
+                    <div class="member-info">
+                        <h3>Az (Remembrance)</h3>
+                        <p>Order division</p>
+                        <div class="member-social">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <a href="https://www.tiktok.com/" target="_blank">
+                        <img src="zan.jpeg" alt="Profil Admin 5: Pria dengan kamera dan properti editing" class="member-image">
+                    </a>
+                    <div class="member-info">
+                        <h3>zanshiro (inevitability)</h3>
+                        <p>Repair division</p>
+                        <div class="member-social">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <a href="https://www.tiktok.com/" target="_blank">
+                        <img src="ziezie.jpeg" alt="Profil Admin 6: Wanita dengan sketchpad anime" class="member-image">
+                    </a>
+                    <div class="member-info">
+                        <h3>Ziezie (Causality)</h3>
+                        <p>Demolition division</p>
+                        <div class="member-social">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Tentang TBV</h3>
+                <p>Komunitas content creator anime yang menciptakan linkungan content creator yang sehat dan bersahabat bagi semuanya ygy.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Link Cepat</h3>
+                <ul class="footer-links">
+                    <li><a href="tbv.html">Home</a></li>
+                    <li><a href="https://www.tiktok.com/@official_tbv?_t=ZS-8yugEPXDLJH&_r=1">Tentang Kami</a></li>
+                    <li><a href="member.html">Daftar Member</a></li>
+                    <li><a href="#">Event</a></li>
+                    <li><a href="#">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Sosial Media</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 TBV Community. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+
+
+        // Enable horizontal scrolling with mouse wheel (laptop/PC) dan swipe (HP)
+        const teamScroll = document.getElementById('teamScroll');
+        teamScroll.addEventListener('wheel', function(e) {
+            if (e.deltaY !== 0) {
+                this.scrollLeft += e.deltaY;
+                e.preventDefault();
+            }
+        });
+        // Swipe/drag scroll for mobile (opsional, agar lebih halus di HP)
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        teamScroll.addEventListener('touchstart', function(e) {
+            isDown = true;
+            startX = e.touches[0].pageX - this.offsetLeft;
+            scrollLeft = this.scrollLeft;
+        });
+        teamScroll.addEventListener('touchmove', function(e) {
+            if (!isDown) return;
+            const x = e.touches[0].pageX - this.offsetLeft;
+            const walk = (startX - x);
+            this.scrollLeft = scrollLeft + walk;
+        });
+        teamScroll.addEventListener('touchend', function() {
+            isDown = false;
+        });
+
+        // Fitur search box: redirect ke halaman sesuai kata kunci
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+
+        function handleSearch() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (!keyword) return;
+
+            // Daftar kata kunci dan target halaman
+            const routes = [
+                { keywords: ['spoiler', 'spoler', 'spiler', 'spolr'], action: () => window.location.href = 'spoiler.html' },
+                { keywords: ['event', 'evnt', 'even', 'evemt'], action: () => alert('belum ada kocak, gua masih pusing bikinnya.') },
+                { keywords: ['member', 'members', 'membar', 'mamber', 'anggota'], action: () => window.location.href = 'member.html' },
+                { keywords: ['power', 'scaling', 'power scaling', 'scalling', 'scalling', 'power scalling', 'death battle', 'debeh', 'Death battle', 'Debeh', 'detbetel'], action: () => window.location.href = 'halaman2.html' },
+                { keywords: ['home', 'beranda', 'utama', 'tbv'], action: () => window.location.href = 'tbv.html' }
+            ];
+
+            // Fuzzy match: cek apakah keyword mengandung atau mirip dengan salah satu kata kunci
+            let found = false;
+            for (const route of routes) {
+                for (const key of route.keywords) {
+                    // Cek jika keyword mengandung kata kunci, atau kata kunci mengandung keyword
+                    if (keyword.includes(key) || key.includes(keyword)) {
+                        route.action();
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+            if (!found) {
+                // Default: arahkan ke home
+                window.location.href = 'tbv.html';
+            }
+        }
+
+        searchBtn.addEventListener('click', handleSearch);
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+    </script>
+</body>
+</html>
