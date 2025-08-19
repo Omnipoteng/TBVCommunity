@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Join Grup WA Komunitas</title>
+    <style>
+        :root {
+            --black: #111111;
+            --white: #f5f5f5;
+            --gray: #333333;
+            --light-gray: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .step {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            background-color: var(--black);
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -25px auto 1rem auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .step-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .step-description {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: var(--black);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--black);
+        }
+
+        .button:hover {
+            background-color: transparent;
+            color: var(--black);
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: var(--black);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+
+        .back-button i {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .step-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cara join TBV Community</h1>
+            <p class="subtitle">Panduan lengkap step-by-step cara join grup WhatsApp komunitas kami</p>
+        </header>
+
+        <div class="steps-container">
+            <!-- Step 1 -->
+            <div class="step">
+                <img src="tbv.jpeg" alt="Logo for Two blue vortex Community Creator displayed in bold white text on a dark textured background. The words Two blue vortex are large and centered, with Community in italicized smaller text below, and Creator spaced out underneath. The overall tone is professional and welcoming." class="step-image">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3 class="step-title">Temukan Link Grup WA</h3>
+                    <p class="step-description">
+                        Klik link undangan grup WhatsApp komunitas di bawah.
+                    </p>
+                    <a href="#" class="button">Masuk grup seleksi</a>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step">
+                <img src="https://placehold.co/800x400?text=Buka+Link" alt="Ilustrasi tangan mengeklik link WhatsApp di smartphone" class="step-image">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3 class="step-title">Buka Link Undangan</h3>
+                    <p class="step-description">
+                        Klik link undangan yang telah Anda terima. Link ini akan membuka aplikasi WhatsApp secara otomatis.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step">
+                <img src="https://placehold.co/800x400?text=Join+Grup" alt="Tampilan layar smartphone dengan tombol Join Group di WhatsApp" class="step-image">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3 class="step-title">Tekan Tombol 'Join Group'</h3>
+                    <p class="step-description">
+                        Setelah link terbuka di WhatsApp, tekan tombol 'Join Group' di bagian bawah layar untuk bergabung.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step">
+                <img src="https://placehold.co/800x400?text=Perkenalkan+Diri" alt="Contoh tampilan chat grup WhatsApp dengan seseorang memperkenalkan diri" class="step-image">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3 class="step-title">Perkenalkan Diri</h3>
+                    <p class="step-description">
+                        Setelah Join, perkenalkan diri kalian secara singkat dan ss acc tiktok kalian kepada salah satu admin yang ada disana.
+                    </p>
+                    <a href="#" class="button">Contoh Perkenalan</a>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step">
+                <img src="https://placehold.co/800x400?text=Ikuti+Peraturan" alt="Daftar peraturan grup WhatsApp dengan centang hijau" class="step-image">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3 class="step-title">Patuhi Aturan Grup</h3>
+                    <p class="step-description">
+                        Baca dan ikuti semua aturan yang telah ditetapkan oleh admin grup untuk pengalaman komunitas yang lebih baik.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button" title="Kembali ke Beranda">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <script>
+        // Scroll animation for steps
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.step');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            steps.forEach(step => {
+                step.style.opacity = 0;
+                step.style.transform = 'translateY(20px)';
+                step.style.transition = 'all 0.5s ease-out';
+                observer.observe(step);
+            });
+        });
+    </script>
+</body>
+</html>
